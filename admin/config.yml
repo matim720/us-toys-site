@@ -1,0 +1,40 @@
+backend:
+  name: github
+  repo: matim/us-toys-site
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+site_url: "https://flourishing-dusk-c4de81.netlify.app"
+display_url: "https://flourishing-dusk-c4de81.netlify.app"
+
+collections:
+  - name: "daily_board"
+    label: "Our Picks For Today"
+    files:
+      - label: "Daily Board"
+        name: "picks"
+        file: "picks.json"
+        format: "json"
+        fields:
+          - label: "Auta"
+            name: "picks"
+            widget: "list"
+            summary: "{{fields.title}} • {{fields.status}} • {{fields.deadlineAt}}"
+            fields:
+              - { label: "Tag", name: "tag", widget: "string", default: "Dzisiaj" }
+              - label: "Status"
+                name: "status"
+                widget: "select"
+                options:
+                  - "hot"
+                  - "worth watching"
+                  - "risky"
+              - { label: "Tytuł", name: "title", widget: "string" }
+              - { label: "Opis", name: "description", widget: "text" }
+              - { label: "Zdjęcie", name: "image", widget: "image", required: false }
+              - { label: "Link do aukcji", name: "link", widget: "string" }
+              - { label: "Deadline", name: "deadlineAt", widget: "datetime", date_format: "YYYY-MM-DD", time_format: "HH:mm", format: "YYYY-MM-DDTHH:mm:ss" }
+              - { label: "Cena teraz", name: "price", widget: "string" }
+              - { label: "Lokalizacja", name: "location", widget: "string" }

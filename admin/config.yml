@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: matim/us-toys-site
+  repo: matim720/us-toys-site
   branch: main
 
 media_folder: "uploads"

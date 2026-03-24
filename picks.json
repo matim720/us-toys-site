@@ -1,37 +1,15 @@
 {
   "picks": [
     {
-      "tag": "Dzisiaj",
+      "price": "0",
+      "deadlineAt": "2026-03-25T00:56:00",
       "status": "hot",
-      "title": "BMW 540i xDrive",
-      "description": "Dobry wybór pod szybki obrót: mocny silnik, wysoka płynność sprzedaży i sensowny zakres napraw.",
-      "image": "IMG_2575.jpg",
-      "link": "https://www.copart.com/",
-      "deadlineAt": "2026-03-25T19:40:00",
-      "price": "$8,900",
-      "location": "New Jersey, USA"
-    },
-    {
+      "location": "CA - SAN BERNARDINO",
+      "title": "AUDI A4 2024",
       "tag": "Dzisiaj",
-      "status": "worth watching",
-      "title": "Audi S5 Sportback",
-      "description": "Auto z potencjałem premium, jeśli szkoda nie wchodzi zbyt głęboko w konstrukcję i elektronikę.",
-      "image": "IMG_2574.jpg",
-      "link": "https://www.iaai.com/",
-      "deadlineAt": "2026-03-25T20:15:00",
-      "price": "$7,400",
-      "location": "Chicago, USA"
-    },
-    {
-      "tag": "Dzisiaj",
-      "status": "risky",
-      "title": "Ford F-150 XLT",
-      "description": "Pickup z dużym popytem i mocną rozpoznawalnością, ale wymaga ostrożnej oceny historii i szkody.",
-      "image": "IMG_2575.jpg",
-      "link": "https://www.manheim.com/",
-      "deadlineAt": "2026-03-25T21:05:00",
-      "price": "$11,200",
-      "location": "Texas, USA"
+      "link": "https://www.copart.com/lot/78885965/salvage-2024-audi-a4-premium-plus-45-ca-san-bernardino",
+      "image": "/uploads/zrzut-ekranu-2026-03-25-o-00.55.03.png",
+      "description": "Super"
     }
   ]
 }

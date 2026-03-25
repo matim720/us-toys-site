@@ -6,8 +6,8 @@ backend:
 media_folder: "uploads"
 public_folder: "/uploads"
 
-site_url: "https://flourishing-dusk-c4de81.netlify.app"
-display_url: "https://flourishing-dusk-c4de81.netlify.app"
+site_url: "https://us-toys.netlify.app"
+display_url: "https://us-toys.netlify.app"
 
 collections:
   - name: "daily_board"
@@ -37,4 +37,17 @@ collections:
               - { label: "Link do aukcji", name: "link", widget: "string" }
               - { label: "Deadline", name: "deadlineAt", widget: "datetime", date_format: "YYYY-MM-DD", time_format: "HH:mm", format: "YYYY-MM-DDTHH:mm:ss" }
               - { label: "Cena teraz", name: "price", widget: "string" }
+              - { label: "Current bid", name: "currentBid", widget: "string", required: false }
+              - { label: "Buy now", name: "buyNow", widget: "string", required: false }
+              - { label: "VIN", name: "vin", widget: "string", required: false }
+              - label: "Źródło"
+                name: "source"
+                widget: "select"
+                required: false
+                options:
+                  - "Copart"
+                  - "IAAI"
+                  - "Manheim"
+                  - "Inne"
+              - { label: "Numer lotu", name: "lotNumber", widget: "string", required: false }
               - { label: "Lokalizacja", name: "location", widget: "string" }

@@ -188,6 +188,14 @@ function renderPicks(picks) {
     const deadlineDate = pick.deadlineAt ? new Date(pick.deadlineAt) : null;
     const deadlineLabel = deadlineDate ? formatDeadline(deadlineDate) : "Brak deadline";
     const countdownLabel = deadlineDate ? formatCountdown(deadlineDate) : "Brak licznika";
+    const source = pick.source || "Aukcja";
+    const lotNumber = pick.lotNumber || "";
+    const vin = pick.vin || "";
+    const currentBid = pick.currentBid || pick.price || "";
+    const buyNow = pick.buyNow || "";
+    const auctionMeta = [source, lotNumber ? `Lot ${lotNumber}` : "", vin ? `VIN ${vin}` : ""]
+      .filter(Boolean)
+      .join(" • ");
 
     const article = document.createElement("article");
     article.className = "info-card pick-card";
@@ -207,10 +215,13 @@ function renderPicks(picks) {
         <p class="tag">${pick.tag}</p>
         <h3>${pick.title}</h3>
         <p>${pick.description}</p>
+        ${auctionMeta ? `<p class="pick-auction-meta">${auctionMeta}</p>` : ""}
         <div class="pick-data">
           <p><span>Deadline</span><strong>${deadlineLabel}</strong></p>
           <p><span>Kończy się za</span><strong>${countdownLabel}</strong></p>
           <p><span>Cena teraz</span><strong>${pick.price}</strong></p>
+          ${currentBid ? `<p><span>Current bid</span><strong>${currentBid}</strong></p>` : ""}
+          ${buyNow ? `<p><span>Buy now</span><strong>${buyNow}</strong></p>` : ""}
           <p><span>Lokalizacja</span><strong>${pick.location}</strong></p>
         </div>
         <a class="pick-link" href="${pick.link}" target="_blank" rel="noreferrer">Zobacz aukcję</a>

@@ -903,6 +903,13 @@ textarea:focus {
   padding: 1.35rem;
 }
 
+.pick-auction-meta {
+  margin: 0.85rem 0 0;
+  color: var(--navy-deep);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
 .pick-data {
   display: grid;
   gap: 0.75rem;

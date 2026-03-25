@@ -29,6 +29,15 @@ const outputs = {
   rateStatus: document.querySelector("#rateStatus"),
 };
 
+function hidePopup() {
+  if (!popup) {
+    return;
+  }
+
+  popup.hidden = true;
+  document.body.classList.remove("popup-open");
+}
+
 function formatCurrency(value) {
   return `${currency.format(value)} zł`;
 }
@@ -132,11 +141,10 @@ if (contactForm) {
 }
 
 if (closePopup) {
-  closePopup.addEventListener("click", () => {
-    popup.hidden = true;
-    document.body.classList.remove("popup-open");
-  });
+  closePopup.addEventListener("click", hidePopup);
 }
+
+hidePopup();
 
 function formatDeadline(date) {
   return new Intl.DateTimeFormat("pl-PL", {

@@ -35,6 +35,8 @@ function hidePopup() {
   }
 
   popup.hidden = true;
+  popup.setAttribute("hidden", "");
+  popup.style.display = "none";
   document.body.classList.remove("popup-open");
 }
 
@@ -145,6 +147,8 @@ if (closePopup) {
 }
 
 hidePopup();
+window.addEventListener("pageshow", hidePopup);
+window.addEventListener("load", hidePopup);
 
 function formatDeadline(date) {
   return new Intl.DateTimeFormat("pl-PL", {

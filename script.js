@@ -40,6 +40,17 @@ function hidePopup() {
   document.body.classList.remove("popup-open");
 }
 
+function showPopup() {
+  if (!popup) {
+    return;
+  }
+
+  popup.hidden = false;
+  popup.removeAttribute("hidden");
+  popup.style.display = "";
+  document.body.classList.add("popup-open");
+}
+
 function formatCurrency(value) {
   return `${currency.format(value)} zł`;
 }
@@ -118,12 +129,14 @@ if (contactForm) {
     submitButton.textContent = "Wysyłanie...";
 
     try {
+      const payload = Object.fromEntries(formData.entries());
+
       const response = await fetch("/", {
         method: "POST",
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-        body: encodeForm(formData),
+        body: encodeForm(payload),
       });
 
       if (!response.ok) {
@@ -131,10 +144,9 @@ if (contactForm) {
       }
 
       contactForm.reset();
-      popup.hidden = false;
-      document.body.classList.add("popup-open");
+      showPopup();
     } catch (error) {
-      window.alert("Nie udało się wysłać formularza. Spróbuj ponownie albo zadzwoń do nas.");
+      HTMLFormElement.prototype.submit.call(contactForm);
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = "Zamów konsultację";

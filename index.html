@@ -59,6 +59,21 @@
     </script>
   </head>
   <body>
+    <form
+      name="kontakt"
+      netlify
+      netlify-honeypot="bot-field"
+      hidden
+      aria-hidden="true"
+    >
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="phone" />
+      <textarea name="message"></textarea>
+      <input type="text" name="subject" />
+      <input type="text" name="bot-field" />
+    </form>
+
     <header class="hero" id="top">
       <nav class="nav">
         <a class="brand" href="#top">

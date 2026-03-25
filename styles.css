@@ -937,10 +937,6 @@ textarea:focus {
   color: var(--red);
 }
 
-.picks-actions {
-  margin-top: 1rem;
-}
-
 .pick-meta {
   margin-top: 1rem;
   padding-top: 0.9rem;
@@ -1041,103 +1037,6 @@ textarea:focus {
   color: rgba(255, 255, 255, 0.86);
 }
 
-.admin-panel {
-  position: fixed;
-  inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
-  background: rgba(8, 18, 36, 0.58);
-  backdrop-filter: blur(8px);
-  z-index: 60;
-}
-
-.admin-panel-card {
-  width: min(1100px, 100%);
-  max-height: calc(100vh - 2rem);
-  overflow: auto;
-  padding: 1.5rem;
-  border-radius: 28px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 239, 228, 0.94));
-  box-shadow: 0 26px 80px rgba(8, 18, 36, 0.28);
-}
-
-.admin-panel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: start;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.admin-panel-header h3 {
-  margin: 0 0 0.45rem;
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  text-transform: uppercase;
-}
-
-.admin-note {
-  margin: 0;
-  color: var(--muted);
-}
-
-.admin-list {
-  display: grid;
-  gap: 1rem;
-}
-
-.admin-item {
-  padding: 1rem;
-  border-radius: 22px;
-  border: 1px solid rgba(11, 34, 72, 0.1);
-  background: rgba(255, 255, 255, 0.78);
-}
-
-.admin-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
-}
-
-.admin-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.9rem;
-}
-
-.admin-grid label {
-  display: grid;
-  gap: 0.45rem;
-  font-weight: 700;
-  color: var(--navy-deep);
-}
-
-.admin-grid input,
-.admin-grid textarea,
-.admin-grid select {
-  width: 100%;
-  border: 1px solid rgba(11, 34, 72, 0.14);
-  border-radius: 16px;
-  padding: 0.9rem 1rem;
-  background: rgba(255, 255, 255, 0.92);
-  font: inherit;
-  color: var(--ink);
-}
-
-.admin-full {
-  grid-column: 1 / -1;
-}
-
-.admin-actions {
-  display: flex;
-  gap: 0.85rem;
-  flex-wrap: wrap;
-  margin-top: 1.2rem;
-}
-
 .success-page {
   min-height: 100vh;
   display: grid;
@@ -1209,7 +1108,6 @@ textarea:focus {
   .trust-points,
   .contact-points,
   .footer,
-  .admin-panel-header,
   .hero-grid,
   .timeline,
   .card-grid,
@@ -1219,8 +1117,7 @@ textarea:focus {
   .calculator-layout,
   .about-layout,
   .contact-panel,
-  .metrics,
-  .admin-grid {
+  .metrics {
     display: grid;
     grid-template-columns: 1fr;
   }

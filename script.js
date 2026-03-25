@@ -11,16 +11,7 @@ const contactForm = document.querySelector(".contact-form");
 const popup = document.querySelector("#formPopup");
 const closePopup = document.querySelector("#closePopup");
 const picksGrid = document.querySelector("#picksGrid");
-const adminPanel = document.querySelector("#adminPanel");
-const openAdminPanel = document.querySelector("#openAdminPanel");
-const closeAdminPanel = document.querySelector("#closeAdminPanel");
-const adminList = document.querySelector("#adminList");
-const addPickButton = document.querySelector("#addPick");
-const savePicksButton = document.querySelector("#savePicks");
-const resetPicksButton = document.querySelector("#resetPicks");
-const PICKS_STORAGE_KEY = "us-toys-picks";
 let picksData = [];
-let defaultPicksData = [];
 
 const fields = {
   usdAmount: document.querySelector("#usdAmount"),
@@ -223,70 +214,6 @@ function sortPicks(picks) {
     .sort((a, b) => new Date(a.deadlineAt).getTime() - new Date(b.deadlineAt).getTime());
 }
 
-function getStoredPicks() {
-  try {
-    const raw = window.localStorage.getItem(PICKS_STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  } catch (error) {
-    return null;
-  }
-}
-
-function saveStoredPicks(picks) {
-  window.localStorage.setItem(PICKS_STORAGE_KEY, JSON.stringify(picks));
-}
-
-function createEmptyPick() {
-  return {
-    tag: "Dzisiaj",
-    status: "worth watching",
-    title: "Nowe auto",
-    description: "Krótki opis, dlaczego warto obserwować tę aukcję.",
-    image: "",
-    link: "https://www.copart.com/",
-    deadlineAt: "2026-03-25T19:40:00",
-    price: "$0",
-    location: "USA",
-  };
-}
-
-function renderAdminPanel(picks) {
-  if (!adminList) {
-    return;
-  }
-
-  adminList.innerHTML = "";
-
-  picks.forEach((pick, index) => {
-    const item = document.createElement("article");
-    item.className = "admin-item";
-    item.innerHTML = `
-      <div class="admin-item-header">
-        <strong>Pozycja ${index + 1}</strong>
-        <button class="button button-ghost admin-remove" type="button" data-index="${index}">Usuń</button>
-      </div>
-      <div class="admin-grid">
-        <label>Tag<input type="text" data-field="tag" data-index="${index}" value="${pick.tag ?? ""}" /></label>
-        <label>Status
-          <select data-field="status" data-index="${index}">
-            <option value="hot" ${pick.status === "hot" ? "selected" : ""}>hot</option>
-            <option value="worth watching" ${pick.status === "worth watching" ? "selected" : ""}>worth watching</option>
-            <option value="risky" ${pick.status === "risky" ? "selected" : ""}>risky</option>
-          </select>
-        </label>
-        <label>Tytuł<input type="text" data-field="title" data-index="${index}" value="${pick.title ?? ""}" /></label>
-        <label>Cena teraz<input type="text" data-field="price" data-index="${index}" value="${pick.price ?? ""}" /></label>
-        <label>Lokalizacja<input type="text" data-field="location" data-index="${index}" value="${pick.location ?? ""}" /></label>
-        <label>Deadline<input type="datetime-local" data-field="deadlineAt" data-index="${index}" value="${pick.deadlineAt ?? ""}" /></label>
-        <label>Zdjęcie<input type="text" data-field="image" data-index="${index}" value="${pick.image ?? ""}" /></label>
-        <label>Link do aukcji<input type="text" data-field="link" data-index="${index}" value="${pick.link ?? ""}" /></label>
-        <label class="admin-full">Opis<textarea rows="3" data-field="description" data-index="${index}">${pick.description ?? ""}</textarea></label>
-      </div>
-    `;
-    adminList.appendChild(item);
-  });
-}
-
 async function hydratePicks() {
   if (!picksGrid) {
     return;
@@ -300,11 +227,8 @@ async function hydratePicks() {
 
     const payload = await response.json();
     const picks = Array.isArray(payload) ? payload : payload.picks || [];
-    defaultPicksData = picks;
-    const stored = getStoredPicks();
-    picksData = sortPicks(stored ?? picks);
+    picksData = sortPicks(picks);
     renderPicks(picksData);
-    renderAdminPanel(picksData);
   } catch (error) {
     picksGrid.innerHTML = `
       <article class="info-card pick-card">
@@ -324,88 +248,3 @@ setInterval(() => {
     renderPicks(picksData);
   }
 }, 60000);
-
-function openPanel() {
-  if (!adminPanel) {
-    return;
-  }
-
-  renderAdminPanel(picksData);
-  adminPanel.hidden = false;
-  document.body.classList.add("popup-open");
-}
-
-function closePanel() {
-  if (!adminPanel) {
-    return;
-  }
-
-  adminPanel.hidden = true;
-  document.body.classList.remove("popup-open");
-}
-
-if (openAdminPanel) {
-  openAdminPanel.addEventListener("click", openPanel);
-}
-
-if (closeAdminPanel) {
-  closeAdminPanel.addEventListener("click", closePanel);
-}
-
-if (addPickButton) {
-  addPickButton.addEventListener("click", () => {
-    picksData = [...picksData, createEmptyPick()];
-    renderAdminPanel(picksData);
-  });
-}
-
-if (adminList) {
-  adminList.addEventListener("input", (event) => {
-    const target = event.target;
-    const index = Number(target.dataset.index);
-    const field = target.dataset.field;
-
-    if (Number.isNaN(index) || !field || !picksData[index]) {
-      return;
-    }
-
-    picksData[index] = {
-      ...picksData[index],
-      [field]: target.value,
-    };
-  });
-
-  adminList.addEventListener("click", (event) => {
-    const target = event.target;
-    if (!target.classList.contains("admin-remove")) {
-      return;
-    }
-
-    const index = Number(target.dataset.index);
-    if (Number.isNaN(index)) {
-      return;
-    }
-
-    picksData = picksData.filter((_, currentIndex) => currentIndex !== index);
-    renderAdminPanel(picksData);
-  });
-}
-
-if (savePicksButton) {
-  savePicksButton.addEventListener("click", () => {
-    picksData = sortPicks(picksData);
-    saveStoredPicks(picksData);
-    renderPicks(picksData);
-    renderAdminPanel(picksData);
-    closePanel();
-  });
-}
-
-if (resetPicksButton) {
-  resetPicksButton.addEventListener("click", () => {
-    picksData = sortPicks(defaultPicksData);
-    window.localStorage.removeItem(PICKS_STORAGE_KEY);
-    renderPicks(picksData);
-    renderAdminPanel(picksData);
-  });
-}

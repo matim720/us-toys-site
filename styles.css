@@ -1015,6 +1015,10 @@ textarea:focus {
   z-index: 50;
 }
 
+.form-popup[hidden] {
+  display: none !important;
+}
+
 .form-popup-card {
   width: min(560px, 100%);
   padding: 1.6rem;

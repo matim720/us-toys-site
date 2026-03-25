@@ -144,9 +144,9 @@ if (contactForm) {
       }
 
       contactForm.reset();
-      showPopup();
+      window.location.href = "/success.html";
     } catch (error) {
-      HTMLFormElement.prototype.submit.call(contactForm);
+      window.alert("Nie udało się wysłać formularza. Spróbuj ponownie albo zadzwoń do nas.");
     } finally {
       submitButton.disabled = false;
       submitButton.textContent = "Zamów konsultację";

@@ -114,10 +114,6 @@ Object.values(fields).forEach((field) => {
 updateConverter();
 hydrateRatesFromNBP();
 
-function encodeForm(data) {
-  return new URLSearchParams(data).toString();
-}
-
 if (closePopup) {
   closePopup.addEventListener("click", hidePopup);
 }
@@ -125,6 +121,25 @@ if (closePopup) {
 hidePopup();
 window.addEventListener("pageshow", hidePopup);
 window.addEventListener("load", hidePopup);
+
+if (contactForm) {
+  contactForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = formData.get("name") || "";
+    const email = formData.get("email") || "";
+    const phone = formData.get("phone") || "";
+    const message = formData.get("message") || "";
+
+    const subject = encodeURIComponent(`Nowy lead z formularza US Toys - ${name}`);
+    const body = encodeURIComponent(
+      `Imię: ${name}\nE-mail: ${email}\nTelefon: ${phone}\n\nZainteresowanie:\n${message}`
+    );
+
+    window.location.href = `mailto:kodowaniemateusz@gmail.com?subject=${subject}&body=${body}`;
+  });
+}
 
 function formatDeadline(date) {
   return new Intl.DateTimeFormat("pl-PL", {

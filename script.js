@@ -118,42 +118,6 @@ function encodeForm(data) {
   return new URLSearchParams(data).toString();
 }
 
-if (contactForm) {
-  contactForm.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    const submitButton = contactForm.querySelector('button[type="submit"]');
-    const formData = new FormData(contactForm);
-
-    submitButton.disabled = true;
-    submitButton.textContent = "Wysyłanie...";
-
-    try {
-      const payload = Object.fromEntries(formData.entries());
-
-      const response = await fetch("/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-        },
-        body: encodeForm(payload),
-      });
-
-      if (!response.ok) {
-        throw new Error(`Form submit failed: ${response.status}`);
-      }
-
-      contactForm.reset();
-      window.location.href = "/success.html";
-    } catch (error) {
-      window.alert("Nie udało się wysłać formularza. Spróbuj ponownie albo zadzwoń do nas.");
-    } finally {
-      submitButton.disabled = false;
-      submitButton.textContent = "Zamów konsultację";
-    }
-  });
-}
-
 if (closePopup) {
   closePopup.addEventListener("click", hidePopup);
 }

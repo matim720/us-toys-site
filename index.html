@@ -59,21 +59,6 @@
     </script>
   </head>
   <body>
-    <form
-      name="kontakt-us-toys"
-      netlify
-      netlify-honeypot="bot-field"
-      hidden
-      aria-hidden="true"
-    >
-      <input type="text" name="name" />
-      <input type="email" name="email" />
-      <input type="text" name="phone" />
-      <textarea name="message"></textarea>
-      <input type="text" name="subject" />
-      <input type="text" name="bot-field" />
-    </form>
-
     <header class="hero" id="top">
       <nav class="nav">
         <a class="brand" href="#top">
@@ -492,18 +477,17 @@
           <div class="contact-side">
             <form
               class="contact-form"
-              name="kontakt-us-toys"
               method="POST"
-              action="/success.html"
-              netlify
-              data-netlify="true"
-              netlify-honeypot="bot-field"
+              action="https://formsubmit.co/kodowaniemateusz@gmail.com"
             >
-              <input type="hidden" name="form-name" value="kontakt-us-toys" />
-              <p hidden>
-                <label>Nie wypełniaj tego pola <input name="bot-field" /></label>
-              </p>
-              <input type="hidden" name="subject" value="Nowy lead z formularza US Toys" />
+              <input type="hidden" name="_subject" value="Nowy lead z formularza US Toys" />
+              <input type="hidden" name="_next" value="https://us-toys.netlify.app/success.html" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input
+                type="hidden"
+                name="_autoresponse"
+                value="Dziękujemy za kontakt z US Toys. Otrzymaliśmy Twoją wiadomość i wrócimy z odpowiedzią możliwie szybko."
+              />
               <label>
                 Imię
                 <input type="text" name="name" placeholder="Jak masz na imię?" required />
